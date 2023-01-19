@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>SachaWassi</title>
+      <link rel="stylesheet" href="../css/cliente.css">
+      <link rel="stylesheet" href="../css/bootstrap.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body>
+      <nav>
+         <div class="menu-icon">
+            <span class="fas fa-bars"></span>
+         </div>
+         <div class="logo">
+            SachaWassi
+         </div>
+         <div class="nav-items">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="index.html">Comprar Boleto</a></li>
+            <li><a href="misboletos.html">Mis Boletos</a></li>
+            <li><a href="#"><div id="nombreGoogle"></div></a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a id="logout">Cerrar Sesión</a></li>
+         </div>
+         <div class="search-icon">
+            <span class="fas fa-search"></span>
+         </div>
+         <div class="cancel-icon">
+            <span class="fas fa-times"></span>
+         </div>
+      </nav>
+      
+      <div class="dashboard">
+        <br><br>
+         <h3>Mi perfil 👤</h3>
+      </div>
+      <br><br><br>
+      
+      <div class="container">
+         <strong>Datos Personales</strong>
+         <div class="row">
+            <div class="col">
+              <input type="text" id="cedula" class="form-control" placeholder="Cédula o Pasaporte" >
+            </div>
+            <br>
+            <div class="col">
+              <input type="text" id="nombres" class="form-control" placeholder="Nombres" >
+            </div>
+            <br>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <input type="text" id="correo" class="form-control" placeholder="Correo" >
+            </div>
+            <br>
+            <div class="col">
+              <input type="text" id="apellidos" class="form-control" placeholder="Apellidos" >
+            </div>
+            <br>
+          </div>
+          <br>
+          <div class="row">
+            <!--boton de actualizar-->
+            <div class="col">
+              <button type="button" id="actualizar" class="btn btn-primary">Editar</button>
+            </div>
+          </div>
+      </div>
+      <br>
+      <div class="container">
+         <strong>Actualizar Contraseña</strong>
+         <br>
+         <p>Para actualizar la contraseña ingresa la actual e ingresa la nueva</p>
+         <div class="row">
+            <div class="col">
+               <input type="password" class="form-control" placeholder="Contraseña Actual" id="contrasenaActual">
+            </div>
+            <div class="col">
+               <input type="password" class="form-control" placeholder="Contraseña Nueva" id="contrasenaNueva">
+            </div>
+         </div>
+         <br>
+         <div class="row">
+            <div class="col">
+               <button type="button" id="actualizarContrasena" class="btn btn-primary">Actualizar</button>
+            </div>
+         </div>
+      </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+      <script src="../js/perfil.js"></script>
+   </body>
+</html>

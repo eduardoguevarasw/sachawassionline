@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/loginadmin.css" />
+    <title>Tablero-Administrador</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="#" class="sign-in-form">
+            <h2 class="title">Login</h2>
+            <div class="input-field">
+              <i class="fas fa-id-card"></i>
+              <input type="text" id="cedula" placeholder="Cédula" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" placeholder="Contraseña" />
+            </div>
+            <input type="submit" id="btnLogin" value="Acceder" class="btn solid" /> 
+            <a href="index.html">Volver al Inicio</a>           
+          </form>
+        </div>
+      </div>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <img src="img/logo.png" class="image" alt="" width="500" height="180" />
+          <div class="content">
+          </div>
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+          </div>
+        </div>
+      </div>
+    </div>
+     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="loginadmin.js"></script>
+  </body>
+</html>

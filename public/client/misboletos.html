@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>SachaWassi</title>
+      <link rel="stylesheet" href="../css/cliente.css">
+      <link rel="stylesheet" href="../css/bootstrap.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+   </head>
+   <body>
+    <script src="https://www.paypal.com/sdk/js?client-id=AbwNMDE0hMUwF4SipklwObjAHdguKJXelcAPwinAbClM7luiao6QEpKHrSzXWY7NT6HvFwx-BecGTo-P&currency=USD"></script>
+      <nav>
+         <div class="menu-icon">
+            <span class="fas fa-bars"></span>
+         </div>
+         <div class="logo">
+            SachaWassi
+         </div>
+         <div class="nav-items">
+            <li><a href="https://eduardoguevarasw.github.io/sachawassi.github.io/">Inicio</a></li>
+            <li><a href="index.html">Comprar Boleto</a></li>
+            <li><a href="misboletos.html">Mis Boletos</a></li>
+            <li><a href="#"><div id="nombreGoogle"></div></a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a  id="logout">Cerrar Sesión</a></li>
+         </div>
+         <div class="search-icon">
+            <span class="fas fa-search"></span>
+         </div>
+         <div class="cancel-icon">
+            <span class="fas fa-times"></span>
+         </div>
+      </nav>
+      
+      <div class="dashboard">
+        <br><br>
+         <h3>Registro de Boletos 🎫</h3>
+      </div>
+      <br><br><br>
+      <div class="container">
+         <div class="row">
+            <table id="table_id" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Cedula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Asientos</th>
+                        <th>Destino</th>
+                        <th>Fecha</th>
+                        <th>Pago</th>
+                        <th>Descargar</th>
+                    </tr>
+                </thead>
+                <tbody id="registroBotes"></tbody>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Cedula</th>
+                        <th>Nombres</th>
+                        <th>Asientos</th>
+                        <th>Destino</th>
+                        <th>Fecha</th>
+                        <th>Pago</th>
+                        <th>Descargar</th>
+                    </tr>
+                </tfoot>
+            </table>
+         </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!--Datatables CDN-->
+      <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+      <script type="text/javascript" charset="utf8"
+          src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+      <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src=" https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+      <script src=" https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+      <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+      <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+      <script src=" https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+      <script src="../js/misboletos.js"></script>
+   </body>
+</html>

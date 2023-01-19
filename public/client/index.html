@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>SachaWassi</title>
+      <link rel="stylesheet" href="../css/cliente.css">
+      <link rel="stylesheet" href="../css/bootstrap.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://www.paypal.com/sdk/js?client-id=AbwNMDE0hMUwF4SipklwObjAHdguKJXelcAPwinAbClM7luiao6QEpKHrSzXWY7NT6HvFwx-BecGTo-P&currency=USD"></script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <nav>
+         <div class="menu-icon">
+            <span class="fas fa-bars"></span>
+         </div>
+         <div class="logo">
+            SachaWassi
+         </div>
+         <div class="nav-items">
+            <li><a href="https://eduardoguevarasw.github.io/sachawassi.github.io">Inicio</a></li>
+            <li><a href="index.html">Comprar Boleto</a></li>
+            <li><a href="misboletos.html">Mis Boletos</a></li>
+            <li><a href="#"><div id="nombreGoogle"></div></a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+            <li><a id="logout">Cerrar Sesión</a></li>
+         </div>
+         <div class="search-icon">
+            <span class="fas fa-search"></span>
+         </div>
+         <div class="cancel-icon">
+            <span class="fas fa-times"></span>
+         </div>
+      </nav>
+      
+      <div class="dashboard">
+        <br><br>
+         <h3>Bienvenido </h3>
+      </div>
+      <br><br><br>
+      <div class="container">
+         <div class="row">
+           <div class="col-sm-4" id="infoBoleto">
+           </div>
+           <div class="col-sm-4">
+            <div class="alert alert-warning" role="alert">
+               La compra será de aproximadamente 10 min, si no realizar la compra en ese tiempo, se cancelará la compra.
+             </div>
+           </div>
+           <div class="col-sm-4" id="temporizador">
+           </div>
+         </div>
+         <br>
+         <div class="row">
+            <div class="col-sm-6">
+               <div class="trapecio">    
+                  <img class="volante"  src="../img/volante.png" alt="volante">
+                  </div>
+                  <div class="bote">
+                  <div class="asientos">
+                      <div class="row">
+                          <div class="seat-ocupado" id="conductor"></div>
+                      </div>
+                      <div class="row">
+                          <div class="seat" id="1" value="1" onclick="seleccionarAsiento(id)">1</div>
+                          <div class="seat" id="2" value="2" onclick="seleccionarAsiento(id)">2</div>
+                          <div class="seat" id="3" value="3" onclick="seleccionarAsiento(id)">3</div>
+                          <div class="seat" id="4" value="4" onclick="seleccionarAsiento(id)">4</div>
+                      </div>
+                      <div class="row">
+                          <div class="seat" id="5" value="5" onclick="seleccionarAsiento(id)">5</div>
+                          <div class="seat" id="6" value="6" onclick="seleccionarAsiento(id)">6</div>
+                          <div class="seat" id="7" value="7" onclick="seleccionarAsiento(id)">7</div>
+                          <div class="seat" id="8" value="8" onclick="seleccionarAsiento(id)">8</div>
+                      </div>
+                      <div class="row">
+                          <div class="seat" id="9"  value="9" onclick="seleccionarAsiento(id)">9</div>
+                          <div class="seat" id="10" value="10" onclick="seleccionarAsiento(id)">10</div>
+                          <div class="seat" id="11" value="11" onclick="seleccionarAsiento(id)">11</div>
+                          <div class="seat" id="12" value="12" onclick="seleccionarAsiento(id)">12</div>
+                      </div>
+                      <div class="row">
+                          <div class="seat" id="13" value="13" onclick="seleccionarAsiento(id)">13</div>
+                          <div class="seat" id="14" value="14" onclick="seleccionarAsiento(id)">14</div>
+                          <div class="seat" id="15" value="15" onclick="seleccionarAsiento(id)">15</div>
+                          <div class="seat" id="16" value="16" onclick="seleccionarAsiento(id)">16</div>
+                      </div>
+                      <div class="row">
+                          <div class="seat" id="17" value="17" onclick="seleccionarAsiento(id)">17</div>
+                          <div class="seat" id="18" value="18" onclick="seleccionarAsiento(id)">18</div>
+                          <div class="seat" id="19" value="19" onclick="seleccionarAsiento(id)">19</div>
+                          <div class="seat" id="20" value="20" onclick="seleccionarAsiento(id)">20</div>
+                      </div>
+                  </div>
+                  </div> 
+            </div>
+            <div class="col-sm-6" id="pasajeros">
+            </div>
+         </div>
+         <br><br>
+         <div class="row">
+          <div class="col-sm-4">
+            <div class="alert alert-success" role="alert">
+              <h1>Total a pagar:</h1>
+              <div id="totalPago"></div>
+            </div>
+         </div>
+         <div class="col-sm-4">
+          <div id="paypal-button-container"></div>
+        </div>
+        <div class="col-sm-4">
+         <!--boton de continuar-->
+         <button type="button" class="btn btn-primary" id="continuar" onclick="continuar()">Continuar</button><br><br>
+         <a href="term&cond.html"><input type="checkbox" id="terminos"> Términos y Condiciones</a>
+       </div>
+      </div>
+      <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+      <script src="../js/cliente.js"></script>
+
+   </body>
+</html>

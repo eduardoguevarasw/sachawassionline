@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!----======== CSS ======== -->
+  <link rel="stylesheet" href="../css/admin.css" />
+
+  <!----===== Iconscout CSS ===== -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+
+
+
+
+  <!--<title>Admin Dashboard Panel</title>-->
+</head>
+
+<body>
+  <nav>
+    <div class="logo-name">
+      <div class="logo-image">
+        <img src="../img/logo-icon.png" alt="logo" />
+      </div>
+
+      <span class="logo_name">Sacha Wassi</span>
+    </div>
+
+    <div class="menu-items">
+      <ul class="nav-links">
+        <li>
+          <a href="./index.html">
+            <i class="uil uil-estate"></i>
+            <span class="link-name">Tablero</span>
+          </a>
+        </li>
+        <li>
+          <a href="./reportes.html">
+            <i class="uil uil-chart"></i>
+            <span class="link-name">Reportes</span>
+          </a>
+        </li>
+        <li>
+          <a href="./ciudades.html">
+            <i class="uil uil-map-marker"></i>
+            <span class="link-name">Ciudades</span>
+          </a>
+        </li>
+        <li>
+          <a href="./embarcacion.html">
+            <i class="uil uil-ship"></i>
+            <span class="link-name">Embarcaciones</span>
+          </a>
+        </li>
+        <li>
+          <a href="./rutas.html">
+            <i class="uil uil-sign-alt"></i>
+            <span class="link-name">Rutas</span>
+          </a>
+        </li>
+        <li>
+          <a href="./guia.html">
+            <i class="uil uil-list-ol-alt"></i>
+            <span class="link-name">Guía de Pasajeros</span>
+          </a>
+        </li>
+        <li><a href="./personal.html">
+          <i class="uil uil-users-alt"></i>
+          <span class="link-name">Personal Administrativo</span>
+      </a></li>
+      </ul>
+      <ul class="logout-mode">
+        <li>
+          <a href="#" class="logout">
+            <i class="uil uil-signout"></i>
+            <span class="link-name">Cerrar Sesión</span>
+          </a>
+        </li>
+        <li class="mode">
+          <a href="#">
+            <i class="uil uil-moon"></i>
+            <span class="link-name">Modo Oscuro</span>
+          </a>
+          <div class="mode-toggle">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <section class="dashboard">
+    <div class="top">
+      <i class="uil uil-bars sidebar-toggle"></i>
+
+      <div class="search-box">
+        <i class="uil uil-search"></i>
+        <input type="text" placeholder="Buscar..." />
+      </div>
+
+      <img src="../img/logo-icon.png" alt="" />
+    </div>
+
+    <div class="dash-content">
+      <div class="overview">
+        <div class="title">
+          <i class="uil uil-sign-alt"></i>
+          <span class="text">Rutas</span>
+        </div>
+        <div class="container">
+          <div class="Rutas">
+            <h3>Agregar Origen y Destino<h3>
+                <br>
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="origen">Origen</label>
+                      <select id="origen" class="form-control" required>
+                        <option>Seleccciona el Origen</option>
+                      </select>
+                      <input type="hidden" id="id" name="id_origen">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="hora">Hora Salida</label>
+                      <input type="time" class="form-control" id="hora" name="hora" placeholder="Hora" required>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary" id="btnAgregar">Agregar Paradas</button>
+
+                <div class="row" >
+                <div id="paradas"></div>
+                <div id="edit"></div>
+                </div>
+          </div>
+          <div class="Seleccionar-Bote">
+            <h3>Seleccionar un Bote</h3>
+            <select name="bote_asignado" id="bote_asignado" class="form-control"></select>
+          </div>
+          <div class="Días-Disponible">
+            <h3>Seleccionar días laborales</h3>
+            <br>
+            <input type="checkbox" data-name="Lunes" class="checkbox" name="lunes" id="lunes" value="lunes" />
+            <input type="checkbox" data-name="Martes" class="checkbox" name="martes" id="martes" value="martes" />
+            <input type="checkbox" data-name="Miércoles" class="checkbox" name="miercoles" id="miercoles"
+              value="miercoles" />
+            <input type="checkbox" data-name="Jueves" class="checkbox" name="jueves" id="jueves" value="jueves" />
+            <input type="checkbox" data-name="Viernes" class="checkbox" name="viernes" id="viernes" value="viernes" />
+            <input type="checkbox" data-name="Sábado" class="checkbox" name="sabado" id="sabado" value="sabado" />
+            <input type="checkbox" data-name="Domingo" class="checkbox" name="domingo" id="domingo" value="domingo" />
+          </div>
+        </div>
+
+        <div class="activity">
+          <div class="title">
+            <i class="uil uil-table"></i>
+            <span class="text">Registro de Rutas</span>
+          </div>
+
+          <table id="table_id" class="display nowrap" style="width:100%">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Bote Asignado</th>
+                <th>Valor Ticket</th>
+                <th>Hora Salida</th>
+                <th>Días Disponible</th>
+                <th>Estado</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody id="registroBotes"></tbody>
+            <tfoot>
+              <tr>
+                <th>No</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Bote Asignado</th>
+                <th>Valor Ticket</th>
+                <th>Hora Salida</th>
+                <th>Días Disponible</th>
+                <th>Estado</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+  </section>
+  <!--Jquery CDN-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!--Datatables CDN-->
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="../js/rutas.js"></script>
+  
+ 
+  
+</body>
+
+</html>

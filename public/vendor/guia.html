@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="../css/admin.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+    <!--<title>Admin Dashboard Panel</title>-->
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="../img/logo-icon.png" alt="logo">
+            </div>
+
+            <span class="logo_name">Sacha Wassi</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="./index.html">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Tablero</span>
+                    </a></li>
+                    <li><a href="./rutas.html">
+                        <i class="uil uil-store"></i>
+                        <span class="link-name">Ventas</span>
+                    </a></li>
+                    <li><a href="./buscar_rutas.html">
+                        <i class="uil uil-calendar-alt"></i>
+                        <span class="link-name">Buscar Ruta</span>
+                    </a></li>
+                <li><a href="./guia.html">
+                        <i class="uil uil-list-ol-alt"></i>
+                        <span class="link-name">Guía de Pasajeros</span>
+                    </a></li>
+            </ul>
+            <ul class="logout-mode">
+                <li><a class="logout">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Cerrar Sesión</span>
+                    </a></li>
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Modo Oscuro</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+
+            <img src="../img/logo-icon.png" alt="">
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+            </div>
+
+            <div class="activity">
+                <div class="title">
+                    <i class="uil uil-table"></i>
+                    <span class="text">Guía de Pasajeros</span>
+                </div>
+
+                <table id="table_id" class="display nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Cedula</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Asientos</th>
+                            <th>Destino</th>
+                            <th>Embarcación</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registroBotes"></tbody>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Cedula</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Asientos</th>
+                            <th>Destino</th>
+                            <th>Embarcación</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+    </section>
+    <!--Jquery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Datatables CDN-->
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src=" https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src=" https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src=" https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../js/guia.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SachaWassi Online</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/busqueda.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script type="text/javascript">
+      (function(w,d,s,r,k,h,m){
+        if(w.performance && w.performance.timing && w.performance.navigation) {
+          w[r] = w[r] || function(){(w[r].q = w[r].q || []).push(arguments)};
+          h=d.createElement('script');h.async=true;h.setAttribute('src',s+k);
+          d.getElementsByTagName('head')[0].appendChild(h);
+          (m = window.onerror),(window.onerror = function (b, c, d, f, g) {
+          m && m(b, c, d, f, g),g || (g = new Error(b)),(w[r].q = w[r].q || []).push(["captureException",g]);})
+        }
+      })(window,document,'//static.site24x7rum.com/beacon/site24x7rum-min.js?appKey=','s247r','20ced03e6f719725f71918c3e0ff2cd3');
+      </script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="content">
+      <div class="logo">
+        <img src="img/logo.png" alt="logo" width="90" height="90">
+      </div>
+      <ul class="menu-list">
+        <div class="icon cancel-btn">
+          <i class="fas fa-times"></i>
+        </div>
+        <li><a href="https://eduardoguevarasw.github.io/sachawassi.github.io">Inicio</a></li>
+        <li><a href="rutasyhorarios.html">Horarios y Rutas</a></li>
+        <li><a href="guiaviaje.html">Guía de Viaje</a></li>
+        <li><a href="comocomprar.html">Cómo comprar?</a></li>
+        <li><a href="term&cond.html">Términos y Condiciones</a></li>
+        <li><a href="login.html">Iniciar Sesión</a></li>
+      </ul>
+      <div class="icon menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+  <div id="booking" class="section">
+    <div class="section-center">
+      <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          <div class="booking-form">
+            <form>
+              <div class="row no-margin">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <span class="form-label">Origen</span>
+                    <select  class="form-control" id="origen"></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row no-margin">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <span class="form-label">Destino</span>
+                        <select class="form-control" id="destino"></select>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <span class="form-label">Fecha de Salida</span>
+                        <input type="date" class="form-control" id="fecha" name="fecha"
+                                placeholder="Fecha de Viaje ">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-btn">
+                    <input type="button" class="submit-btn" value="Buscar Disponibilidad" onclick="buscarRutas()"></input>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="main.js"></script>
+  <script>
+    const body = document.querySelector("body");
+    const navbar = document.querySelector(".navbar");
+    const menuBtn = document.querySelector(".menu-btn");
+    const cancelBtn = document.querySelector(".cancel-btn");
+    menuBtn.onclick = ()=>{
+      navbar.classList.add("show");
+      menuBtn.classList.add("hide");
+      body.classList.add("disabled");
+    }
+    cancelBtn.onclick = ()=>{
+      body.classList.remove("disabled");
+      navbar.classList.remove("show");
+      menuBtn.classList.remove("hide");
+    }
+    window.onscroll = ()=>{
+      this.scrollY > 20 ? navbar.classList.add("sticky") : navbar.classList.remove("sticky");
+    }
+  </script>
+  
+</body>
+<br>
+    <br>
+    <br>
+    <conten>
+        <div class="container" id="busqueda">
+          <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-12">
+              <h4>Resultados de Búsqueda</h4>
+              <div class="title">
+                
+                <p>Selecciona tus asientos y realiza el pago mediante nuestros métodos de pago</p>
+                <br>
+                <div class="Ruta" id="boteList"></div>
+                <br>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Bote</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody id="infoBotes">
+                      <tr>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </conten>
+    <footer>
+      <div class="footer">
+        <div class="footer-content">
+          <div class="footer-section about">
+              Somos una empresa de transporte de pasajeros que brinda servicios de transporte fluvial de pasajeros para el cantón Aguarico.
+            <div class="contact">
+              <span><i class="fas fa-phone"></i> &nbsp; 0960708503</span>
+              <span><i class="fas fa-envelope"></i> &nbsp; sachawassi@gmail.com </span>
+              <span><i class="fas fa-user"></i> &nbsp; Administrador/Vendedor <a href="loginAdmin.html">Login</a></span>
+    </footer>
+    <script type="text/javascript">
+      (function(w,d,s,r,k,h,m){
+        if(w.performance && w.performance.timing && w.performance.navigation) {
+          w[r] = w[r] || function(){(w[r].q = w[r].q || []).push(arguments)};
+          h=d.createElement('script');h.async=true;h.setAttribute('src',s+k);
+          d.getElementsByTagName('head')[0].appendChild(h);
+          (m = window.onerror),(window.onerror = function (b, c, d, f, g) {
+          m && m(b, c, d, f, g),g || (g = new Error(b)),(w[r].q = w[r].q || []).push(["captureException",g]);})
+        }
+      })(window,document,'//static.site24x7rum.com/beacon/site24x7rum-min.js?appKey=','s247r','20ced03e6f719725f71918c3e0ff2cd3');
+      </script>
+</html>

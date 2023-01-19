@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/html2pdf.bundle.min.js"></script>
+
+    <title>Boleto</title>
+  </head>
+  <body>
+    <div id="boleto">
+      <script>
+        //obtener datos de compra de localstorage
+        let compra = JSON.parse(localStorage.getItem("datosCompra"));
+        console.log(compra);
+        //obtener el id boleto
+        let idBoleto = document.getElementById("boleto");
+        //insertar html en el id boleto
+
+        boleto.innerHTML = `
+        <!DOCTYPE html>
+    <html>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css?family=Amaranth&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <div class="v5_21">
+          <div class="v6_31"></div>
+          <div class="v9_88"></div>
+          <span class="v6_32"
+            >Cooperativa de Transporte Fluvial Sacha Wassi</span
+          ><span class="v6_33">El Coca-Orellana-Ecuador</span
+          ><span class="v6_34">RUC: 1500466386001</span>
+          <div class="v6_38"></div>
+          <span class="v6_39">Boleto:</span><span class="v6_40">Valor:</span
+          ><span class="v6_41">Cliente: </span><span class="v6_43">Origen:</span
+          ><span class="v6_44">Destino:</span><span class="v6_47">Cédula: </span
+          ><span class="v9_51">${compra.cedula}</span
+          ><span class="v9_86">${compra.asientosArray}</span
+          ><span class="v9_87">Requisitos para Viajar.</span
+          ><span class="v9_56">${compra.id}</span
+          ><span class="v9_55">${compra.idUsuario}</span
+          ><span class="v9_53">${compra.destino}</span
+          ><span class="v9_52">${compra.destino}</span
+          ><span class="v6_48">Nombres y Apellidos:</span
+          ><span class="v9_85">Asiento: </span
+          ><span class="v6_45">Fecha Salida:</span
+          ><span class="v9_54">${compra.fecha}</span><span class="v9_57">$${compra.totalPago} USD</span
+          ><span class="v6_42">Datos del Viaje</span
+          ><span class="v6_46">Datos Pasajero</span
+          ><span class="v9_89"
+            >Cualquier retraso aplicable al pasajero, que ocasione la pérdida
+            del viaje, es de única y absoluta responsabilidad del pasajero por
+            lo que la cooperativa ante el incumplimiento del Pasajero no
+            realizará ninguna devolución o pago de valor alguno por estos
+            inconvenientes ocasionados.</span
+          ><span class="v9_90"
+            >El pasajero deberá presentarse 15 min antes de la embarcación para
+            la verificación de la documentación, en caso de no poseerlos la
+            cooperativa negará el acceso a la embarcación </span
+          ><span class="v9_50">${compra.nombresyapellidos}</span>
+        </div>
+      </body>
+    </html>
+    <br /><br />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-size: 14px;
+      }
+      .v5_21 {
+        width: 815px;
+        height: 1060px;
+        background: rgba(255, 255, 255, 1);
+        opacity: 1;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+      }
+      .v6_31 {
+        width: 720px;
+        height: 5px;
+        background: rgba(217, 217, 217, 1);
+        opacity: 1;
+        position: absolute;
+        top: 145px;
+        left: 47px;
+        overflow: hidden;
+      }
+      .v9_88 {
+        width: 720px;
+        height: 5px;
+        background: rgba(217, 217, 217, 1);
+        opacity: 1;
+        position: absolute;
+        top: 643px;
+        left: 47px;
+        overflow: hidden;
+      }
+      .v6_32 {
+        width: 495px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 28px;
+        left: 234px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 32px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_33 {
+        width: 173px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 119px;
+        left: 395px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 16px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_34 {
+        width: 143px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 101px;
+        left: 411px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 16px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_38 {
+        width: 200px;
+        height: 124px;
+        background-image: url("../img/logo_negro.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        opacity: 1;
+        position: absolute;
+        top: 9px;
+        left: 34px;
+        overflow: hidden;
+      }
+      .v6_39 {
+        width: 60px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 189px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_40 {
+        width: 51px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 254px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_41 {
+        width: 65px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 222px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_43 {
+        width: 63px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 350px;
+        left: 57px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_44 {
+        width: 70px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 386px;
+        left: 57px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_47 {
+        width: 63px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 517px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_51 {
+        width: 307px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 517px;
+        left: 147px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_86 {
+        width: 307px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 595px;
+        left: 150px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_87 {
+        width: 474px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 666px;
+        left: 157px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_56 {
+        width: 307px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 189px;
+        left: 144px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_55 {
+        width: 307px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 222px;
+        left: 134px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_53 {
+        width: 307px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 350px;
+        left: 144px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_52 {
+        width: 307px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 386px;
+        left: 144px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_48 {
+        width: 180px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 553px;
+        left: 57px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_85 {
+        width: 85px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 595px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_45 {
+        width: 112px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 413px;
+        left: 57px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_54 {
+        width: 135px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 413px;
+        left: 220px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_57 {
+        width: 135px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 254px;
+        left: 204px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_42 {
+        width: 128px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 314px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v6_46 {
+        width: 126px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 481px;
+        left: 56px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_89 {
+        width: 769px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 744px;
+        left: 5px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 14px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_90 {
+        width: 791px;
+        color: rgba(147, 147, 147, 1);
+        position: absolute;
+        top: 700px;
+        left: 12px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 14px;
+        opacity: 1;
+        text-align: center;
+      }
+      .v9_50 {
+        width: 387px;
+        color: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 553px;
+        left: 258px;
+        font-family: Amaranth;
+        font-weight: Regular;
+        font-size: 20px;
+        opacity: 1;
+        text-align: center;
+      }
+    </style>`;
+      </script>
+    </div>
+
+    
+
+    <button id="download">Descargar</button>
+    <script>
+      document.getElementById("download").addEventListener("click", () => {
+        const element = document.getElementById("boleto");
+        const opt = {
+          margin: 0,
+          filename: "boleto.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 3 },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        };
+        html2pdf().from(element).set(opt).save();
+      });
+    </script>
+  </body>
+</html>

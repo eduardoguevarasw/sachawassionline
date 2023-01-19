@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="../css/admin.css" />
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+
+    
+
+    
+    <!--<title>Admin Dashboard Panel</title>-->
+  </head>
+  <body>
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="../img/logo-icon.png" alt="logo" />
+        </div>
+
+        <span class="logo_name">Sacha Wassi</span>
+      </div>
+
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="./index.html">
+              <i class="uil uil-estate"></i>
+              <span class="link-name">Tablero</span>
+            </a>
+          </li>
+          <li>
+            <a href="./reportes.html">
+              <i class="uil uil-chart"></i>
+              <span class="link-name">Reportes</span>
+            </a>
+          </li>
+          <li>
+            <a href="./ciudades.html">
+              <i class="uil uil-map-marker"></i>
+              <span class="link-name">Ciudades</span>
+            </a>
+          </li>
+          <li>
+            <a href="./embarcacion.html">
+              <i class="uil uil-ship"></i>
+              <span class="link-name">Embarcaciones</span>
+            </a>
+          </li>
+          <li>
+            <a href="./rutas.html">
+              <i class="uil uil-sign-alt"></i>
+              <span class="link-name">Rutas</span>
+            </a>
+          </li>
+          <li>
+            <a href="./guia.html">
+              <i class="uil uil-list-ol-alt"></i>
+              <span class="link-name">Guía de Pasajeros</span>
+            </a>
+          </li>
+          <li><a href="./personal.html">
+            <i class="uil uil-users-alt"></i>
+            <span class="link-name">Personal Administrativo</span>
+        </a></li>
+        </ul>
+        
+
+        <ul class="logout-mode">
+          <li>
+            <a href="#" class="logout">
+              <i class="uil uil-signout"></i>
+              <span class="link-name">Cerrar Sesión</span>
+            </a>
+          </li>
+
+          <li class="mode">
+            <a href="#">
+              <i class="uil uil-moon"></i>
+              <span class="link-name">Modo Oscuro</span>
+            </a>
+
+            <div class="mode-toggle">
+              <span class="switch"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Buscar..." />
+        </div>
+
+        <img src="../img/logo-icon.png" alt="" />
+      </div>
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-map-marker"></i>
+            <span class="text">Ciudades</span>
+          </div>
+
+          <div class="boxes">
+            <div class="box box1">
+            </div>
+            <div class="box box2">
+              <i class="uil uil-map-marker"></i>
+              <span class="text">Registrar Ciudades</span>
+              <br />
+              <p>Nombre de la Ciudad</p>
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                placeholder="Ej: Nuevo Rocafuerte"
+              />
+              <input
+                hidden
+                type="text"
+                id="id"
+                class="form-control"
+                placeholder=""
+              />
+              <br />
+              <br />
+              <p>Estado</p>
+              <select class="form-control" id="estado">
+                <option value="disponible">Disponible</option>
+                <option value="no disponible">No Disponible</option>
+              </select>
+              <br />
+              <button type="button" class="btnGuardar" onclick="registrarCiudad()" id="saveBote" >
+                Registrar
+              </button>
+              <button type="button" hidden onclick="editCiudad()" class="btnEdit" id="updateBote" >
+                Editar
+              </button>
+              
+            </div>
+            <div class="box box1">
+            </div>
+          </div>
+        </div>
+
+       <div class="activity">
+          <div class="title">
+            <i class="uil uil-table"></i>
+            <span class="text">Registro de Ciudades</span>
+          </div>
+          
+          <table id="table_id" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Nombre Ciudad</th>
+                    <th>Estado</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="registroBotes"></tbody>
+            <tfoot>
+                <tr>
+                    <th>Número</th>
+                    <th>Nombre Ciudad</th>
+                    <th>Estado</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </tfoot>
+        </table>
+      </div>
+    </section>
+    <!--Jquery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Datatables CDN-->
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../js/ciudades.js"></script>
+  </body>
+</html>

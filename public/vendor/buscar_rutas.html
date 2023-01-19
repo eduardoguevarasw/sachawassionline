@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--<title>Admin Dashboard Panel</title>--> 
+</head>
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="../img/logo-icon.png" alt="logo">
+            </div>
+
+            <span class="logo_name">Sacha Wassi</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="./index.html">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Tablero</span>
+                </a></li>
+                <li><a href="./rutas.html">
+                    <i class="uil uil-store"></i>
+                    <span class="link-name">Ventas</span>
+                </a></li>
+                <li><a href="./buscar_rutas.html">
+                    <i class="uil uil-calendar-alt"></i>
+                    <span class="link-name">Buscar Ruta</span>
+                </a></li>
+                <li><a href="./guia.html">
+                    <i class="uil uil-list-ol-alt"></i>
+                    <span class="link-name">Guía de Pasajeros</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="#" class="logout">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Cerrar Sesión</span>
+                </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Modo Oscuro</span>
+                </a>
+
+                <div class="mode-toggle">
+                  <span class="switch"></span>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            
+            <img src="./img/logo-icon.png" alt="">
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-shopping-cart"></i>
+                    <span class="text">Vendedor/a</span>
+                </div>
+                <form class="row g-3">
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label">Origen</label>
+                      <select  class="form-control" id="origen"></select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label">Destino</label>
+                      <select class="form-control" id="destino"></select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="inputCity" class="form-label">Fecha de Salida</label>
+                      <input type="date" class="form-control" id="fecha">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-12">
+                      <button type="button" class="btn btn-primary" onclick="buscarRuta()" >Buscar Ruta</button>
+                    </div>
+                  </form>
+            </div>
+            <div>
+                <table id="rutas2" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Embarcación</th>
+                            <th>Hora</th>
+                            <th>Precio</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="botes_disponibles">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../js/rutasvendor.js"></script>
+</body>
+</html>
