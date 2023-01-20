@@ -116,14 +116,14 @@
             </div>
             <div class="box box2">
               <i class="uil uil-map-marker"></i>
-              <span class="text">Registro de Personal Administrativo</span>
+              <span class="text">Personal Administrativo</span>
               <br />
               <p>Cédula</p>
               <input
                 type="text"
-                id="nombre"
+                id="cedula"
                 class="form-control"
-                placeholder=""
+                placeholder="1500466386"
               />
               <p>Nombres</p>
               <input
@@ -135,14 +135,14 @@
               <p>Apellidos</p>
               <input
                 type="text"
-                id="nombre"
+                id="apellido"
                 class="form-control"
                 placeholder=""
               />
               <p>Contraseña</p>
               <input
                 type="password"
-                id="nombre"
+                id="password"
                 class="form-control"
                 placeholder=""
               />
@@ -184,20 +184,22 @@
             <thead>
                 <tr>
                     <th>Número</th>
-                    <th>Nombre Ciudad</th>
-                    <th>Estado</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Cédula</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Rol</th>
+                    <th>Acción</th>
                 </tr>
             </thead>
             <tbody id="registroBotes"></tbody>
             <tfoot>
                 <tr>
-                    <th>Número</th>
-                    <th>Nombre Ciudad</th>
-                    <th>Estado</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                  <th>Número</th>
+                  <th>Cédula</th>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Rol</th>
+                  <th>Acción</th>
                 </tr>
             </tfoot>
         </table>
@@ -210,6 +212,6 @@
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="../js/ciudades.js"></script>
+    <script src="../js/personal.js"></script>
   </body>
 </html>
