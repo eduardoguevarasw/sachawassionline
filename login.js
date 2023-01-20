@@ -19,7 +19,7 @@ async function signInWithGoogle() {
         provider: 'google',
         options: {
             remember: true,
-            redirectTo: 'https://eduardoguevarasw.github.io/sachawassi.github.io/public/client/index.html',
+            redirectTo: 'https://eduardoguevarasw.github.io/sachawassionline/public/client/index.html',
         }
       
      })
@@ -63,7 +63,7 @@ document.getElementById("registrar").addEventListener("click", function(){
         result.style.color = "green";
         //esperar 5 segundos y redirigir
         setTimeout(function(){
-          window.location.href = "https://eduardoguevarasw.github.io/sachawassi.github.io/public/client/index.html";
+          window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/public/client/index.html";
         }, 5000);
         //redirigir a inicio de client
       });
@@ -85,9 +85,9 @@ document.getElementById("ingresar").addEventListener("click", function(){
       //si existe una ruta dirigir a index cliente
       let idRuta = localStorage.getItem("idRuta");
       if(idRuta != null){
-      window.location.href = "https://eduardoguevarasw.github.io/sachawassi.github.io/public/client/index.html";
+      window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/public/client/index.html";
       }else{
-        window.location.href = "https://eduardoguevarasw.github.io/sachawassi.github.io";
+        window.location.href = "https://eduardoguevarasw.github.io/sachawassionline";
       }
       //guardar cedula en localstorage
       localStorage.setItem("cedula", response.data[0].cedula);
