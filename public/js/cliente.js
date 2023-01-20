@@ -226,8 +226,94 @@ if(asiento.classList.contains("seat-ocupado")){
 
 }
 
+const continuar = async () => {
+  //comprobar que todos los campos esten llenos
+  if (
+    document.getElementById("cedula").value == "" ||
+    document.getElementById("nombre").value == "" ||
+    document.getElementById("apellido").value == ""
+  ) {
+    alert("Por favor llene todos los campos 💡");
+  } else {
+    let cedulas = document.getElementsByName("cedula");
+    let nombres = document.getElementsByName("nombre");
+    let apellidos = document.getElementsByName("apellido");
+    console.log(cedulas[0].value);
+    console.log(nombres[0].value);
+    console.log(apellidos[0].value);
+    //obtener los asientos seleccionados
+    let asiento = document.querySelectorAll(".seat-selected");
+    console.log(asiento);
+    let fecha = localStorage.getItem("fechaViaje");
+    console.log(fecha);
+    let destino = localStorage.getItem("destino");
+    console.log(destino);
+    //buscar cedula del usuario en la base de datos
+    let idUsuario = sessionStorage.getItem("idUsuario");
+    let bote_asignado = document.getElementById("bote_a").innerHTML;
+    let totalPago = sessionStorage.getItem("totalPago");
+    let asientosArray = [];
+    let nombresyapellidos = [];
+    let cedula = [];
+    let nombre = [];
+    let apellido = [];
+    for (var i = 0; i < cedulas.length; i++) {
+      cedula.push(cedulas[i].value);
+      nombre.push(nombres[i].value);
+      apellido.push(apellidos[i].value);
+      asientosArray.push(asientos[i]);
+      nombresyapellidos.push(nombre[i]+" "+apellido[i]);
+    }
 
+    var compra = {
+      cedula,
+      nombre,
+      apellido,
+      asientosArray,
+      nombresyapellidos,
+      fecha,
+      destino,
+      idUsuario,
+      totalPago,
+      bote_asignado,
+    };
+     localStorage.setItem("compra", JSON.stringify(compra));
+    
+    //guardar uno por uno
+    for (var i = 0; i < cedulas.length; i++) {
+      let compra = {
+        cedula: cedula[i],
+        nombre: nombre[i],
+        apellido: apellido[i],
+        asientosArray: asientosArray[i],
+        fecha,
+        destino,
+        idUsuario,
+        totalPago,
+        bote_asignado,
+        nombresyapellidos: nombresyapellidos[i],
 
+      };
+      //comprobar que no exista asientos con el mismo numero
+      let res = await database.from("compras").select("*").eq("asientosArray", asientosArray[i]).eq("fecha", fecha).eq("destino", destino).eq("bote_asignado", bote_asignado);
+      if (res.data.length > 0) {
+        alert("El asiento " + asientosArray[i] + " ya esta ocupado ❌");
+        //reload page
+        location.reload();
+      } else {
+        let resp = await database.from("compras").insert([compra]);
+        console.log(resp);
+        if(resp.error){
+          alert("Error al guardar la compra ❌");
+        }else{
+          document.getElementById("paypal-button-container").style.display = "block";
+        }
+      }
+    }
+}
+}
+
+/*
 const continuar = async () => {
   //comprobar que todos los campos esten llenos
   if (
@@ -322,7 +408,7 @@ const continuar = async () => {
         console.log("no hay datos")
       }  
   }
-};
+};*/
 
 /*
 const guardarcompra = async () => {
@@ -389,20 +475,49 @@ paypal
     // Finalize the transaction after payer approval
     onApprove: (data, actions) => {
       return actions.order.capture().then(function (orderData) {
+
         alert("Compra realizada con éxito ✅ ");
+        //recargar la pagina
+          location.reload();
       });
     },
     oncancel: (data, actions) => {
       return actions.order.capture().then(function (orderData) {
+       
+        //obtener datos de compra para eliminarlos de la base
+        let compra = JSON.parse(localStorage.getItem("compra"));
+        //eliminar de la base de datos
+        for(var i in compra.cedulas){
+          database.from("compras").delete().eq("cedula",compra.cedulas[i]).eq("fecha",compra.fecha).eq("destino",compra.destino).eq("bote_asignado",compra.bote_asignado).then(({data, error}) => {
+            if(error){
+              console.log(error);
+            }else{
+              console.log(data);
+            }
+          });
+        }
+        //eliminar datos de compra
         alert("Pago cancelado 😢 ");
-        //redireccionar
-        window.location.href = "index.html";
+
       });
     },
     onError: (data, actions) => {
       return actions.order.capture().then(function (orderData) {
-        alert("Error en el pago 😢 ");
-        window.location.href = "index.html";
+        //obtener datos de compra para eliminarlos de la base
+        let compra = JSON.parse(localStorage.getItem("compra"));
+        //eliminar de la base de datos
+        for(var i in compra.cedulas){
+          database.from("compras").delete().eq("cedula",compra.cedulas[i]).eq("fecha",compra.fecha).eq("destino",compra.destino).eq("bote_asignado",compra.bote_asignado).then(({data, error}) => {
+            if(error){
+              console.log(error);
+            }else{
+              console.log(data);
+            }
+          });
+        
+        }
+        //eliminar datos de compra
+        alert("Pago cancelado 😢 ");
       });
     },
   })
