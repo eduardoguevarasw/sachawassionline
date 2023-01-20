@@ -249,7 +249,7 @@ const continuar = async () => {
     let destino = localStorage.getItem("destino");
     console.log(destino);
     //buscar cedula del usuario en la base de datos
-    let idUsuario = sessionStorage.getItem("idUsuario");
+    let idUsuario = sessionStorage.getItem("cedula");
     let bote_asignado = document.getElementById("bote_a").innerHTML;
     let totalPago = sessionStorage.getItem("totalPago");
     let asientosArray = [];
@@ -477,8 +477,9 @@ paypal
       return actions.order.capture().then(function (orderData) {
 
         alert("Compra realizada con éxito ✅ ");
-        //recargar la pagina
-          location.reload();
+        //redireccionar a la pagina de index
+        window.location.href = "../client/gracias.html";
+        
       });
     },
     oncancel: (data, actions) => {
@@ -498,6 +499,8 @@ paypal
         }
         //eliminar datos de compra
         alert("Pago cancelado 😢 ");
+        //redireccionar a la pagina de index
+        window.location.href = "../client/index.html";
 
       });
     },
@@ -518,6 +521,8 @@ paypal
         }
         //eliminar datos de compra
         alert("Pago cancelado 😢 ");
+        //redireccionar a la pagina de index
+        window.location.href = "../client/index.html";
       });
     },
   })
