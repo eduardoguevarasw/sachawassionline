@@ -312,6 +312,9 @@ const comprobar = async () => {
     alert("Los asientos " + asientosRepetidos + " ya estan ocupados");
   }
   else{
+    //guardar en la base de datos
+    let resp = await database.from("compras").insert([compra]);
+    console.log(resp);
     //mostar boton de paypal
     document.getElementById("paypal-button-container").style.display = "block";
   }
