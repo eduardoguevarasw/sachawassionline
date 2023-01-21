@@ -279,39 +279,43 @@ const continuar = async () => {
     };
      localStorage.setItem("compra", JSON.stringify(compra));
     
-    //guardar uno por uno
-    for (var i = 0; i < cedulas.length; i++) {
-      let compra = {
-        cedula: cedula[i],
-        nombre: nombre[i],
-        apellido: apellido[i],
-        asientosArray: asientosArray[i],
-        fecha,
-        destino,
-        idUsuario,
-        totalPago,
-        bote_asignado,
-        nombresyapellidos: nombresyapellidos[i],
+    //comprobar que no exista asientos repetidos
+    comprobar();
+}
+}
 
-      };
-      //comprobar que no exista asientos con el mismo numero
-      let res = await database.from("compras").select("*").eq("asientosArray", asientosArray[i]).eq("fecha", fecha).eq("destino", destino).eq("bote_asignado", bote_asignado);
-      if (res.data.length > 0) {
-        alert("El asiento " + asientosArray[i] + " ya esta ocupado ❌");
-        //reload page
-        location.reload();
-      } else {
-        let resp = await database.from("compras").insert([compra]);
-        console.log(resp);
-        if(resp.error){
-          alert("Error al guardar la compra ❌");
-        }else{
-          document.getElementById("paypal-button-container").style.display = "block";
-        }
+const comprobar = async () => {
+  let compra = JSON.parse(localStorage.getItem("compra"));
+  //buscar si en la base existe una compra con los mismos asientos
+  let asientos = compra.asientosArray;
+  let fecha = compra.fecha;
+  let destino = compra.destino;
+  let bote_asignado = compra.bote_asignado;
+  //buscar en la base de datos
+  let resp = await database.from("compra").select("*").eq("fecha", fecha).eq("destino", destino).eq("bote_asignado", bote_asignado);
+  console.log(resp);
+  let asientosOcupados = [];
+  for (var i = 0; i < resp.length; i++) {
+    asientosOcupados.push(resp[i].asientosArray);
+  }
+  console.log(asientosOcupados);
+  let asientosRepetidos = [];
+  for (var i = 0; i < asientos.length; i++) {
+    for (var j = 0; j < asientosOcupados.length; j++) {
+      if (asientos[i] == asientosOcupados[j]) {
+        asientosRepetidos.push(asientos[i]);
       }
     }
-}
-}
+  }
+  console.log(asientosRepetidos);
+  if (asientosRepetidos.length > 0) {
+    alert("Los asientos " + asientosRepetidos + " ya estan ocupados");
+  }
+  else{
+    document.getElementById("paypal-button-container").style.display = "none";
+  }
+
+};
 
 /*
 const continuar = async () => {
