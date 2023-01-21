@@ -312,7 +312,8 @@ const comprobar = async () => {
     alert("Los asientos " + asientosRepetidos + " ya estan ocupados");
   }
   else{
-    document.getElementById("paypal-button-container").style.display = "none";
+    //mostar boton de paypal
+    document.getElementById("paypal-button-container").style.display = "block";
   }
 
 };
@@ -486,27 +487,22 @@ paypal
         
       });
     },
-    oncancel: (data, actions) => {
-      return actions.order.capture().then(function (orderData) {
-       
-        //obtener datos de compra para eliminarlos de la base
-        let compra = JSON.parse(localStorage.getItem("compra"));
-        //eliminar de la base de datos
-        for(var i in compra.cedulas){
-          database.from("compras").delete().eq("cedula",compra.cedulas[i]).eq("fecha",compra.fecha).eq("destino",compra.destino).eq("bote_asignado",compra.bote_asignado).then(({data, error}) => {
-            if(error){
-              console.log(error);
-            }else{
-              console.log(data);
-            }
-          });
-        }
-        //eliminar datos de compra
-        alert("Pago cancelado 😢 ");
-        //redireccionar a la pagina de index
-        window.location.href = "../client/index.html";
-
-      });
+    onCancel: (data, actions) => {
+      alert("Pago cancelado 😢 ");
+      //eliminar datos de compra de la base de datos
+      let compra = JSON.parse(localStorage.getItem("compra"));
+      //eliminar de la base de datos
+      for(var i in compra.cedulas){
+        database.from("compras").delete().eq("cedula",compra.cedulas[i]).eq("fecha",compra.fecha).eq("destino",compra.destino).eq("bote_asignado",compra.bote_asignado).then(({data, error}) => {
+              if(error){
+                console.log(error);
+              }else{
+                console.log(data);
+              }
+            });
+          
+          }
+      }
     },
     onError: (data, actions) => {
       return actions.order.capture().then(function (orderData) {
