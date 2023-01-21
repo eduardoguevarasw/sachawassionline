@@ -499,9 +499,8 @@ paypal
               }else{
                 console.log(data);
               }
-            });
-          
-          }
+        });
+              
       }
     },
     onError: (data, actions) => {
