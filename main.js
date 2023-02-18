@@ -3,6 +3,14 @@ const key =
 const url = "https://gfvljzwpzicwynqmirui.supabase.co";
 const database = supabase.createClient(url, key);
 
+document.getElementById("miperfil").style.display = "none";
+
+//si sesion es true mostrar el boton de cerrar sesion
+if (localStorage.getItem("sesion") == "true") {
+    document.getElementById("sesion").style.display = "none";
+    document.getElementById("miperfil").style.display = "block";
+} 
+
 //traer los datos de ciudades y mostrar en select
 function traerCiudades() {
     database.from('rutas').select("origen").then(({ data, error }) => {
@@ -44,18 +52,17 @@ function traerCiudades() {
 }
 traerCiudades();
 
-/*const minValue = new Date();
+const minValue = new Date();
 minValue.setDate(minValue.getDate());
-document.getElementById('fecha').min = minValue.toISOString().split("T")[0];*/
+document.getElementById('fecha').min = minValue.toISOString().split("T")[0];
 //controlar la fecha minima
 const fecha = document.getElementById("fecha");
 fecha.addEventListener("change", function(){
-    const fechaMin = new Date();
-    fechaMin.setDate(fechaMin.getDate());
     const fechaMax = new Date();
-    fechaMax.setDate(fechaMax.getDate() + 30);
-    if(fecha.value < fechaMin.toISOString().split("T")[0]){
-        alert("La fecha minima es " + fechaMin.toISOString().split("T")[0]);
+    fechaMax.setDate(fechaMax.getDate() + 90);
+    console.log(fechaMax.toISOString().split("T")[0]);
+    if(fecha.value > fechaMax.toISOString().split("T")[0]){
+        alert("La fecha maxima es " + fechaMax.toISOString().split("T")[0]);
         fecha.value = "";
     }
 });
@@ -66,6 +73,8 @@ function buscarRutas() {
     const origen = document.getElementById("origen").value;
     const destino = document.getElementById("destino").value;
     const fecha = document.getElementById("fecha").value;
+    const fechaFormateada2 = fecha.split("-").reverse().join("-");
+
     //bajar a #busqueda 
     document.getElementById("busqueda").scrollIntoView();
     //convertir fecha en día de la semana
@@ -94,24 +103,28 @@ function buscarRutas() {
         //si la hora actual es menor a la hora de salida mostrar
         //fecha actual en formato dd/mm/aaaa
         let fechaActual = new Date();
-        let diaActual = fechaActual.getDate();
-        let mesActual = fechaActual.getMonth() + 1;
-        let anioActual = fechaActual.getFullYear();
-        let fechaFormateada = anioActual + "-" + mesActual + "-" + diaActual;
-        //comparar fecha actual con fecha de viaje
-        console.log(fechaFormateada);
-        console.log(fecha);
-        console.log(horaFormateada);
+        //formato dd-mm-aaaa
+        let fechaFormateada = fechaActual.getDate() + "-" + (fechaActual.getMonth() + 1) + "-" + fechaActual.getFullYear();
+        if(fechaActual.getMonth() + 1 < 10){
+            fechaFormateada = fechaActual.getDate() + "-0" + (fechaActual.getMonth() + 1) + "-" + fechaActual.getFullYear();
+        }
+
+
         
        database.from('rutas').select().then(({ data, error }) => {
             document.getElementById("boteList").innerHTML = `<h4>${origen} ➡️ ${destino}   |  ${dia} </h4>`;
             option = "";
             for (var i = 0; i < data.length; i++) {
-                if(fechaFormateada == fecha && horaFormateada > data[i].hora){
-                    document.getElementById("boteList").innerHTML = `<h4>Lo sentimos, no hay rutas disponibles para la fecha seleccionada</h4>`
+                if(fechaFormateada == fechaFormateada2 && horaFormateada > data[i].hora){
+                    document.getElementById("boteList").innerHTML = `
+                    <h4>Lo sentimos,ruta fuera de horario ❌ </h4>
+                    <h4>🕙 ${data[i].hora} </h4>`
                 }else{
                     if (data[i].origen == origen && data[i].destino == destino && data[i].dias_disponible.includes(dia) && data[i].estado == "disponible") {
                     
+                        //contar todos los asientos registrados en la tabla botes
+                        
+
                         console.log("si");
                         option += `
                         <tr>
@@ -134,7 +147,7 @@ function buscarRutas() {
 function procesoCompra(id) {
     let fechaViaje = document.getElementById("fecha").value;
     //dar formato a la fecha 01 a 1 
-    let fecha = fechaViaje.split("-");
+    /*let fecha = fechaViaje.split("-");
     let dia = fecha[2];
     let mes = fecha[1];
     let anio = fecha[0];
@@ -144,8 +157,8 @@ function procesoCompra(id) {
     if (mes < 10) {
         mes = mes.replace("0", "");
     }
-    let fechaFormateada = dia + "/" + mes + "/" + anio;
-    localStorage.setItem("fechaViaje", fechaFormateada);
+    let fechaFormateada = dia + "/" + mes + "/" + anio;*/
+    localStorage.setItem("fechaViaje", fechaViaje);
     localStorage.setItem("idRuta", id);
     //comprobar si hay usuario logueado
     if (localStorage.getItem("cedula") == null) {

@@ -16,6 +16,7 @@
         <div class="signin-signup">
           <form  class="sign-in-form">
             <h2 class="title">Iniciar Sesión</h2>
+            <div id="resultado">👤</div>
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" id="correologin" placeholder="Correo"  required/>
@@ -24,20 +25,22 @@
               <i class="fas fa-lock"></i>
               <input type="password" id="contrasenalogin" placeholder="Contraseña" required />
             </div>
-            <input type="button" id="ingresar" value="Acceder" class="btn solid" />
-            <p class="social-text">O Ingresa con Google</p>
-            <div class="social-media">
-              <a href="#" class="social-icon" onclick="signInWithGoogle()">
-                <i class="fab fa-google" onclick="signInWithGoogle()"></i>
-              </a>
-            </div>
+            <input type="button" id="ingresar" value="Ingresar" class="btn solid" />
+            <a href="recuperar.html">Olvidaste tu contraseña?</a>
           </form>
           <form  class="sign-up-form">
             <h2 class="title">Registrarse</h2>
-            <div id="result">👤</div>
+            <div id="result"></div>
+            <div>
+              <input type="radio" id="cedula" name="tipo" value="cedula" checked />
+              <label for="cedula">Cédula</label>
+              <input type="radio" id="pasaporte" name="tipo" value="pasaporte" />
+              <label for="pasaporte">Pasaporte</label>
+            </div>
+            <div id="result"></div>
             <div class="input-field">
               <i class="fas fa-id-card"></i>
-              <input type="text" pattern="[0-9]{0,12}" id="cedula" name="cedula" placeholder="Cédula o Pasaporte" title="El campo debe tener como máximo 12 dígitos en caso de cédula">
+              <input type="text" pattern="[0-9]{0,12}" id="identificacion" name="cedula" placeholder="Identificación" title="El campo debe tener como máximo 12 dígitos en caso de cédula">
             </div>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -84,7 +87,7 @@
           <div class="content">
             <h3>Ya tienes una cuenta?</h3>
             <p>
-              Ingresa con tu correo y contraseña o con una cuenta de Google.
+              Ingresa con tu correo y contraseña
             </p>
             <button class="btn transparent" id="sign-in-btn">
               Iniciar Sesión

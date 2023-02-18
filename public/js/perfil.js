@@ -7,41 +7,11 @@ const database = supabase.createClient(url, key);
 const logout = document.querySelector("#logout");
 logout.addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/";
+    window.location.href = "https://eduardoguevarasw.github.io/sachawassi/";
 })
-
-const menuBtn = document.querySelector(".menu-icon span");
-const searchBtn = document.querySelector(".search-icon");
-const cancelBtn = document.querySelector(".cancel-icon");
-const items = document.querySelector(".nav-items");
-const form = document.querySelector("form");
-menuBtn.onclick = ()=>{
-  items.classList.add("active");
-  menuBtn.classList.add("hide");
-  searchBtn.classList.add("hide");
-  cancelBtn.classList.add("show");
-}
-cancelBtn.onclick = ()=>{
-  items.classList.remove("active");
-  menuBtn.classList.remove("hide");
-  searchBtn.classList.remove("hide");
-  cancelBtn.classList.remove("show");
-  form.classList.remove("active");
-  cancelBtn.style.color = "#ff3d00";
-}
-searchBtn.onclick = ()=>{
-  form.classList.add("active");
-  searchBtn.classList.add("hide");
-  cancelBtn.classList.add("show");
-}
-
-
 //buscar en la base de datos
 //funcion para obtener datos 
  function obteneruser(){
-    //obtener id de los inputs
-   
-
   //obtener la cedula de localstore
   let dni = localStorage.getItem("cedula");
   console.log(dni);
@@ -60,4 +30,68 @@ searchBtn.onclick = ()=>{
     document.getElementById("correo").value = data[0].correo;
   })
  }
-  obteneruser();
+obteneruser();
+
+//funcion para actualizar datos
+function actualizar(){
+  //obtener la cedula de localstore
+  let dni = localStorage.getItem("cedula");
+  console.log(dni);
+  //obtener los nuevos datos 
+  let cedula = document.getElementById("cedula").value;
+  let nombres = document.getElementById("nombres").value;
+  let apellidos = document.getElementById("apellidos").value;
+  let correo = document.getElementById("correo").value;
+  //actualizar los datos
+  database
+  .from('clientes')
+  .update({ cedula: cedula, nombres: nombres, apellidos: apellidos, correo: correo })
+  .eq('cedula', dni)
+  .then(({ data, error }) => {
+    if(error){
+      console.log(error);
+    }else{
+      alert("Datos actualizados correctamente ✅");
+      //recargar la pagina actualizar 
+      window.location.href = "https://eduardoguevarasw.github.io/sachawassi/public/client/perfil.html";
+    }
+  })
+
+};
+
+  //funcion para actualizar contraseña
+  function actualizarpass(){
+    //obtener la contraseña actual
+    let passactual = document.getElementById("contrasenaActual").value;
+    //obtener la nueva contraseña
+    passactual2 = btoa(passactual);
+    let passnueva = document.getElementById("contrasenaNueva").value;
+    passnueva2 = btoa(passnueva);
+    let cedula = document.getElementById("cedula").value;
+  
+    //validar que la contraseña actual sea igual a la que esta en la base de datos
+    let data = database.from('clientes').select('password').eq('cedula', cedula);
+    data.then((res) => {
+      console.log(res.data[0].password);
+      if(res.data[0].password == passactual2){
+        //actualizar la contraseña
+        database
+        .from('clientes')
+        .update({ password: passnueva2 })
+        .eq('cedula', cedula)
+        .then(({ data, error }) => {
+          if(error){
+            console.log(error);
+          }else{
+            alert("Contraseña actualizada correctamente ✅");
+            //recargar la pagina actualizar 
+            window.location.href = "https://eduardoguevarasw.github.io/sachawassi/public/client/perfil.html";
+          }
+        })
+      }else{
+        alert("La contraseña actual no coincide con la que esta en la base de datos ❌");
+      }
+    });
+  
+  }
+

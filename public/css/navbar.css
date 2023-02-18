@@ -113,8 +113,107 @@ input[type="checkbox"]{
   font-size: 40px;
   font-weight: 700;
 }
-
-.boletos div{
+.barco div{
   font-size: 15px;
   font-weight: 700;
 }
+.barco{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: -1;
+  width: 100%;
+  padding: 0 30px;
+  color: #1b1b1b;
+}
+
+.container{
+  position: absolute;
+  top: auto;
+  left: auto;
+  text-align: center;
+  z-index: -1;
+  width: 100%;
+  padding: 0 30px;
+  color: #1b1b1b;
+}
+
+
+.trapecio  {
+  width: 300px; 
+  height: 50px; 
+  border: 3px solid #555;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  display: flex;
+}
+.bote  {
+   width: 300px; 
+   height: 500px; 
+   border: 3px solid #555;
+   display: flex;
+   
+}
+
+.volante {
+  width: 35px;
+  height: 35px;
+  margin-top: 53px;
+  margin-left: 18px;
+}
+.conductor{
+  width: 50px;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 40px;
+}
+
+.asientos{
+  margin-top: 20px;
+  perspective: 1000px;
+  margin-bottom: 30px;
+  margin-right: 40px;
+}
+
+.seat{
+  background-image: url("../img/seat.png");
+  height: 40px;
+  width: 40px;
+  margin: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.seat-ocupado{
+  background-image: url("../img/seat-ocupado.png");
+  height: 40px;
+  width: 40px;
+  margin: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.seat:not(.seat-ocupado):hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.seat-selected {
+  background-image: url("../img/seat-selected.png");
+  height: 40px;
+  width: 40px;
+  margin: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+}
+
+

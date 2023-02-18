@@ -13,8 +13,10 @@
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
     <!--<title>Admin Dashboard Panel</title>-->
 </head>
 
@@ -51,6 +53,10 @@
                 <li><a href="./rutas.html">
                         <i class="uil uil-sign-alt"></i>
                         <span class="link-name">Rutas</span>
+                    </a></li>
+                    <li><a href="./tours.html">
+                        <i class="uil uil-kayak"></i>
+                        <span class="link-name">Tours</span>
                     </a></li>
                 <li><a href="./guia.html">
                         <i class="uil uil-list-ol-alt"></i>
@@ -103,7 +109,17 @@
                     <i class="uil uil-table"></i>
                     <span class="text">Guía de Pasajeros</span>
                 </div>
-
+                Buscar por Fecha: 
+                <div class="row">
+                    <div class="col-4">
+                        <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Fecha">
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary" id="buscar" onclick="buscarfecha()">Buscar</button>
+                    </div>
+                </div>
+                <br>
+                <br>
                 <table id="table_id" class="display nowrap" style="width:100%">
                     <thead>
                         <tr>
@@ -114,7 +130,6 @@
                             <th>Asientos</th>
                             <th>Destino</th>
                             <th>Embarcación</th>
-                            <th>Fecha</th>
                         </tr>
                     </thead>
                     <tbody id="registroBotes"></tbody>
@@ -127,21 +142,27 @@
                             <th>Asientos</th>
                             <th>Destino</th>
                             <th>Embarcación</th>
-                            <th>Fecha</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
 
     </section>
-    <!--Jquery CDN-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--Datatables CDN-->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src=" https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src=" https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src=" https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="../js/guia.js"></script>
 </body>
-
 </html>

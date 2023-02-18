@@ -40,7 +40,7 @@ sidebarToggle.addEventListener("click", () => {
 const logout = document.querySelector(".logout");
 logout.addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/";
+    window.location.href = "https://eduardoguevarasw.github.io/sachawassi/";
 })
 
 
@@ -134,6 +134,8 @@ const selectBote = async (id) => {
         document.getElementById("nombre").value = bote.nombres;
         document.getElementById("apellido").value = bote.apellidos;
         document.getElementById("password").value = bote.password;
+        //rol
+        const rol = document.getElementById("rol").value = bote.rol;
         //ocultar boton de registrar en type="hidden"
         document.getElementById("saveBote").style.display = "none";
         //mostrar boton de editar y quitar hidden 
@@ -149,11 +151,14 @@ function editCiudad(){
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
     const password = document.getElementById("password").value;
+    //rol
+    const rol = document.getElementById("rol").value;
     const bote = {
         cedula: cedula,
         nombres: nombre,
         apellidos: apellido,
-        password: password
+        password: password,
+        rol : rol
     }
     database
     .from("usuarios")
@@ -167,7 +172,38 @@ function editCiudad(){
     })
     .catch((error) => {
         console.log("Error", error);
-        alert("Error al actualizar el bote ❌");
+        alert("Error al actualizar ❌");
+        //recargar la pagina
+        location.reload();
+    });
+}
+
+function registrarPersonal(){
+    const cedula = document.getElementById("cedula").value;
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const password = document.getElementById("password").value;
+    //rol
+    const rol = document.getElementById("rol").value;
+    const bote = {
+        cedula: cedula,
+        nombres: nombre,
+        apellidos: apellido,
+        password: password,
+        rol : rol
+    }
+    database
+    .from("usuarios")
+    .insert([bote])
+    .then((response) => {
+        console.log("Registro exitoso", response);
+        alert("Registro exitoso ✅");
+        //RECARGAR LA PAGINA
+        location.reload();
+    })
+    .catch((error) => {
+        console.log("Error", error);
+        alert("Error al registrar ❌");
         //recargar la pagina
         location.reload();
     });

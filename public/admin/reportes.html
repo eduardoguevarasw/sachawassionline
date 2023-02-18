@@ -8,11 +8,11 @@
     
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="../css/admin.css">
-     
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
     <!--<title>Admin Dashboard Panel</title>--> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/Chart.min.css" rel="stylesheet">
 </head>
 <body>
     <nav>
@@ -47,6 +47,10 @@
                 <li><a href="./rutas.html">
                     <i class="uil uil-sign-alt"></i>
                     <span class="link-name">Rutas</span>
+                </a></li>
+                <li><a href="./tours.html">
+                    <i class="uil uil-kayak"></i>
+                    <span class="link-name">Tours</span>
                 </a></li>
                 <li><a href="./guia.html">
                     <i class="uil uil-list-ol-alt"></i>
@@ -101,7 +105,7 @@
                     <div class="box box2">
                         <i class="uil uil-usd-circle"></i>
                         <span class="text">Ganancias</span>
-                        <span class="number" id="ganancias">0</span>
+                        <span class="number" id="ganancias"></span>
                     </div>
                     <div class="box box2">
                         <i class="uil uil-ticket"></i>
@@ -114,6 +118,67 @@
                         <span class="number" id="clientes">0</span>
                     </div>
                 </div>
+            </div>
+            <div class="activity">
+                <div class="title">
+                  <i class="uil uil-table"></i>
+                    <span class="text">Reportes</span>
+                </div>
+                <p>Reporte de Ventas por Fechas</p>
+                <br>
+                <div class="row">
+                    <div class="col-3">
+                        <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+                    </div>
+                    <div class="col-3">
+                        <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" id="btnBuscar" onclick="reporteFechas()">Buscar</button>
+                    </div>
+                    <br>
+                 </div>
+                 <div>
+                    <canvas id="reportes" width="100" height="20"></canvas>
+                 </div>
+                 <br>
+                 <p>Reporte de Ventas por Ruta</p>
+                 <br>
+                 <div class="row">
+                    <div class="col-3">
+                        <select class="form-control" aria-label="Default select example" id="origen">
+                            <option selected>Origen</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <select class="form-control" aria-label="Default select example" id="destino">
+                            <option selected>Destino</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" id="btnBuscar" onclick="reporteRuta()">Buscar</button>
+                    </div>
+                    <br>
+                 </div>
+                 <div>
+                    <canvas id="reportesRuta" width="100" height="20"></canvas>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        Reporte de destinos más comprados
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary" id="btnBuscar" onclick="destinosComprados()">Reporte</button>
+                    </div>
+                </div>
+                <p>
+                <br>
+                <div>
+                    <canvas id="reportesDestino" width="100" height="20"></canvas>
+                </div>
+
             </div>
         </div>
     </section>

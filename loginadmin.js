@@ -38,3 +38,9 @@
         }
       });
       
+
+let regresar = document.getElementById("regresar");
+    regresar.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "./index.html";
+    });

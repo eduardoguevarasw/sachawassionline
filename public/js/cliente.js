@@ -5,30 +5,7 @@ const database = supabase.createClient(url, key);
 //bloquear boton paypal
 document.getElementById("paypal-button-container").style.display = "none";
 
-const menuBtn = document.querySelector(".menu-icon span");
-const searchBtn = document.querySelector(".search-icon");
-const cancelBtn = document.querySelector(".cancel-icon");
-const items = document.querySelector(".nav-items");
-const form = document.querySelector("form");
-menuBtn.onclick = () => {
-  items.classList.add("active");
-  menuBtn.classList.add("hide");
-  searchBtn.classList.add("hide");
-  cancelBtn.classList.add("show");
-};
-cancelBtn.onclick = () => {
-  items.classList.remove("active");
-  menuBtn.classList.remove("hide");
-  searchBtn.classList.remove("hide");
-  cancelBtn.classList.remove("show");
-  form.classList.remove("active");
-  cancelBtn.style.color = "#ff3d00";
-};
-searchBtn.onclick = () => {
-  form.classList.add("active");
-  searchBtn.classList.add("hide");
-  cancelBtn.classList.add("show");
-};
+
 
 //funcion para verificar si un asientos esta reservado
 const checkAsiento = async () => {
@@ -93,6 +70,7 @@ const infoRuta = async () => {
                 <strong>${data[0].origen} ➡️ ${data[0].destino}</strong>
                 <p class="mb-0">Precio: $ <strong id="precioBoleto">${data[0].precio}</strong></p>
                 <p class="mb-0">Hora: <strong id="horaBoleto">${data[0].hora}</strong></p>
+                <p class="mb-0">Llegada Aprox: <strong id="llegadaBoleto">${data[0].llegada}</strong></p>
                 </div>
                 `;
         }
@@ -160,6 +138,7 @@ let asientosSelected = document.getElementById("asientosSelected");
 let precioBoleto = document.getElementById("precioBoleto");
 let agregarPasajero = document.getElementById("pasajeros");
 let horaBoleto = document.getElementById("horaBoleto");
+let llegadaBoleto = document.getElementById("llegadaBoleto");
 console.log(precioBoleto);
 let totalPago = document.getElementById("totalPago");
 
@@ -179,9 +158,12 @@ if(asiento.classList.contains("seat-ocupado")){
     <div class="card">
         <div class="card-body">
         <h5 class="card-title">Asiento ${id}</h5>
-        <div id="result">👤</div>
-        <label>Cédula</label>
-        <input class="form-control" type="text" id="cedula" name="cedula" placeholder="Cédula" required/><br>
+        <select class="form-control" id="tipoDNI" name="tipoDNI">
+        <option value="cedula">Cédula</option>
+        <option value="pasaporte">Pasaporte</option>
+        <select>
+        <br>
+        <input class="form-control" type="text" id="identificacion" name="cedula" placeholder="Indentificación" required/><br>
         <label>Nombre</label>
         <input type="text"  class="form-control" id="nombre" name="nombre" placeholder="Nombre"><br>
         <label>Apellido</label>
@@ -226,6 +208,174 @@ if(asiento.classList.contains("seat-ocupado")){
 
 }
 
+
+const continuar = async () => {
+  //comprobar que todos los campos esten llenos
+  if (
+    document.getElementById("identificacion").value == "" ||
+    document.getElementById("nombre").value == "" ||
+    document.getElementById("apellido").value == ""
+  ) {
+    alert("Por favor llene todos los campos 💡");
+  } else {
+    //si esta marcado como cedula continuar 
+    let tipoDNI = document.getElementById("tipoDNI").value;
+    if (tipoDNI == "cedula") {
+    let cedulas = document.getElementsByName("cedula");
+    let nombres = document.getElementsByName("nombre");
+    let apellidos = document.getElementsByName("apellido");
+    //validar las cedulas
+    let dni = cedulas.length;
+    let validadas = 0;
+    cedulas.forEach((cedula) => {
+      var cedula = cedula.value;
+      array = cedula.split("");
+      num = array.length;
+      if (num == 10) {
+        total = 0;
+        digito = (array[9] * 1);
+        for (i = 0; i < (num - 1); i++) {
+          mult = 0; if ((i % 2) != 0) { total = total + (array[i] * 1); } else {
+            mult = array[i] * 2; if (mult > 9)
+              total = total + (mult - 9);
+            else
+              total = total + mult;
+          }
+        }
+        decena = total / 10;
+        decena = Math.floor(decena);
+        decena = (decena + 1) * 10;
+        final = (decena - total);
+        if ((final == 10 && digito == 0) || (final == digito)) {
+          //si el numero de cedulas es igual al numero de cedulas validadas
+          validadas++;
+          if (dni == validadas) {
+            let asiento = document.querySelectorAll(".seat-selected");
+            console.log(asiento);
+            let fecha = localStorage.getItem("fechaViaje");
+            console.log(fecha);
+            let origen = localStorage.getItem("origen");
+            let destino = localStorage.getItem("destino");
+            console.log(destino);
+            //buscar cedula del usuario en la base de datos
+            let idUsuario = localStorage.getItem("cedula");
+            let idRuta = localStorage.getItem("idRuta");
+            let bote_asignado = document.getElementById("bote_a").innerHTML;
+            let totalPago = sessionStorage.getItem("totalPago");
+            let horaSalida = document.getElementById("horaBoleto").innerHTML;
+            let llegadaBoleto = document.getElementById("llegadaBoleto").innerHTML;
+
+            let asientosArray = [];
+            let nombresyapellidos = [];
+            let cedula = [];
+            let nombre = [];
+            let apellido = [];
+            let tx = [];
+            for (var i = 0; i < cedulas.length; i++) {
+              tx.push(Math.floor(Math.random() * 1000000000000));
+              cedula.push(cedulas[i].value);
+              nombre.push(nombres[i].value);
+              apellido.push(apellidos[i].value);
+              asientosArray.push(asientos[i]);
+              nombresyapellidos.push(nombre[i] + " " + apellido[i]);
+            }
+
+            var compra = {
+              cedula,
+              nombre,
+              apellido,
+              asientosArray,
+              nombresyapellidos,
+              fecha,
+              origen,
+              horaSalida,
+              llegadaBoleto,
+              destino,
+              idUsuario,
+              totalPago,
+              bote_asignado,
+              tx,
+              idRuta
+            };
+            localStorage.setItem("compra", JSON.stringify(compra));
+            //comprobar que no exista asientos repetidos
+            comprobar();
+          }
+        }
+        else {
+          alert("La cedula:" + cedula + " es invalida ❌")
+          return false;
+        }
+      }
+      else {
+        alert("La cedula:" + cedula + " no tiene los 10 digitos ❌")
+        return false;
+      }
+      });
+    }else{
+      let tipoDNI = document.getElementById("tipoDNI").value;
+      if(tipoDNI == "pasaporte"){
+      //guardar los datos de la compra
+            let cedulas = document.getElementsByName("cedula");
+            let nombres = document.getElementsByName("nombre");
+            let apellidos = document.getElementsByName("apellido");
+            let asiento = document.querySelectorAll(".seat-selected");
+            console.log(asiento);
+            let fecha = localStorage.getItem("fechaViaje");
+            console.log(fecha);
+            let origen = localStorage.getItem("origen");
+            let destino = localStorage.getItem("destino");
+            console.log(destino);
+            //buscar cedula del usuario en la base de datos
+            let idUsuario = localStorage.getItem("cedula");
+            let idRuta = localStorage.getItem("idRuta");
+            let bote_asignado = document.getElementById("bote_a").innerHTML;
+            let totalPago = sessionStorage.getItem("totalPago");
+            let horaSalida = document.getElementById("horaBoleto").innerHTML;
+            let llegadaBoleto = document.getElementById("llegadaBoleto").innerHTML;
+
+            let asientosArray = [];
+            let nombresyapellidos = [];
+            let cedula = [];
+            let nombre = [];
+            let apellido = [];
+            let tx = [];
+            for (var i = 0; i < cedulas.length; i++) {
+              tx.push(Math.floor(Math.random() * 1000000000000));
+              cedula.push(cedulas[i].value);
+              nombre.push(nombres[i].value);
+              apellido.push(apellidos[i].value);
+              asientosArray.push(asientos[i]);
+              nombresyapellidos.push(nombre[i] + " " + apellido[i]);
+            }
+
+            var compra = {
+              cedula,
+              nombre,
+              apellido,
+              asientosArray,
+              nombresyapellidos,
+              fecha,
+              origen,
+              horaSalida,
+              llegadaBoleto,
+              destino,
+              idUsuario,
+              totalPago,
+              bote_asignado,
+              tx,
+              idRuta
+            };
+            localStorage.setItem("compra", JSON.stringify(compra));
+            //comprobar que no exista asientos repetidos
+            comprobar();
+          }
+
+    }
+  }
+
+};
+/*
 const continuar = async () => {
   //comprobar que todos los campos esten llenos
   if (
@@ -248,16 +398,20 @@ const continuar = async () => {
     console.log(fecha);
     let destino = localStorage.getItem("destino");
     console.log(destino);
+    let origen = localStorage.getItem("origen");
     //buscar cedula del usuario en la base de datos
-    let idUsuario = sessionStorage.getItem("cedula");
+    let idUsuario = localStorage.getItem("cedula");
     let bote_asignado = document.getElementById("bote_a").innerHTML;
+    let horaSalida = document.getElementById("horaBoleto").innerHTML;
     let totalPago = sessionStorage.getItem("totalPago");
     let asientosArray = [];
     let nombresyapellidos = [];
     let cedula = [];
     let nombre = [];
     let apellido = [];
+    let tx = [];
     for (var i = 0; i < cedulas.length; i++) {
+      tx.push(Math.floor(Math.random() * 1000000000000))
       cedula.push(cedulas[i].value);
       nombre.push(nombres[i].value);
       apellido.push(apellidos[i].value);
@@ -273,16 +427,26 @@ const continuar = async () => {
       nombresyapellidos,
       fecha,
       destino,
+      origen,
+      horaSalida,
       idUsuario,
       totalPago,
       bote_asignado,
+      tx,
     };
-     localStorage.setItem("compra", JSON.stringify(compra));
+    
+    if(compra.cedula.length == 0){
+      alert("Por favor seleccione un asiento");
+    }else{
+
+      localStorage.setItem("compra", JSON.stringify(compra));
+      console.log("guardar en local storage");
+    }
     
     //comprobar que no exista asientos repetidos
     comprobar();
 }
-}
+}*/
 
 const comprobar = async () => {
   let compra = JSON.parse(localStorage.getItem("compra"));
@@ -291,36 +455,81 @@ const comprobar = async () => {
   let fecha = compra.fecha;
   let destino = compra.destino;
   let bote_asignado = compra.bote_asignado;
+  console.log(asientos);
+  console.log(fecha);
+  console.log(destino);
+  console.log(bote_asignado);
+
   //buscar en la base de datos
   let resp = await database.from("compras").select("*").eq("fecha", fecha).eq("destino", destino).eq("bote_asignado", bote_asignado);
-  console.log(resp);
+  console.log(asientos);
   let asientosOcupados = [];
-  for (var i = 0; i < resp.length; i++) {
-    asientosOcupados.push(resp[i].asientosArray);
-  }
+  resp.data.forEach(element => {
+    asientosOcupados.push(element.asientosArray);
+  });
   console.log(asientosOcupados);
   let asientosRepetidos = [];
-  for (var i = 0; i < asientos.length; i++) {
-    for (var j = 0; j < asientosOcupados.length; j++) {
-      if (asientos[i] == asientosOcupados[j]) {
-        asientosRepetidos.push(asientos[i]);
+
+  asientos.forEach(element => {
+    asientosOcupados.forEach(element2 => {
+      if(element == element2){
+        asientosRepetidos.push(element);
       }
-    }
-  }
+    });
+  });
+  
   console.log(asientosRepetidos);
   if (asientosRepetidos.length > 0) {
     alert("Los asientos " + asientosRepetidos + " ya estan ocupados");
+    //recargar la pagina
+    location.reload();
   }
   else{
     //guardar en la base de datos
-    let resp = await database.from("compras").insert([compra]);
+    //generar un número de transacción de 12 digitos
+    
+    var datos = {
+      cedula: compra.cedula,
+      nombre: compra.nombre,
+      apellido: compra.apellido,
+      asientosArray: compra.asientosArray,
+      nombresyapellidos: compra.nombresyapellidos,
+      fecha: compra.fecha,
+      origen: compra.origen,
+      destino: compra.destino,
+      idUsuario: compra.idUsuario,
+      totalPago: compra.totalPago,
+      bote_asignado: compra.bote_asignado,
+      tx: compra.tx,
+      idRuta: compra.idRuta
+    }
+    for(var i = 0; i < datos.cedula.length; i++){
+      //guardar en la base de datos uno por uno
+      let resp = await database.from("compras").insert(
+        {
+          cedula: datos.cedula[i],
+          nombre: datos.nombre[i],
+          apellido: datos.apellido[i],
+          asientosArray: datos.asientosArray[i],
+          nombresyapellidos: datos.nombresyapellidos[i],
+          fecha: datos.fecha,
+          origen: datos.origen,
+          destino: datos.destino,
+          idUsuario: datos.idUsuario,
+          totalPago: datos.totalPago,
+          bote_asignado: datos.bote_asignado,
+          tx: datos.tx[i],
+          idRuta: datos.idRuta
+          
+        })
+    }
+    //let resp = await database.from("compras").insert([compra]);
     console.log(resp);
     //mostar boton de paypal
     document.getElementById("paypal-button-container").style.display = "block";
   }
 
 };
-
 /*
 const continuar = async () => {
   //comprobar que todos los campos esten llenos
@@ -456,6 +665,20 @@ const guardarcompra = async () => {
   window.location.href = "../client/gracias.html";
 };*/
 
+function eliminartx(){
+  console.log("entro a eliminar");
+  //obtener datos de compra para eliminarlos de la base
+  let compra = JSON.parse(localStorage.getItem("compra"));
+  //eliminar de la base de datos
+  for(var i in compra.tx){
+     console.log(compra.tx[i])
+    database.from("compras").delete().eq("tx",compra.tx[i]).then((data) => {
+      console.log(data);
+    });
+  }
+}
+
+
 paypal
   .Buttons({
     // Sets up the transaction when a payment button is clicked
@@ -484,55 +707,92 @@ paypal
     onApprove: (data, actions) => {
       return actions.order.capture().then(function (orderData) {
 
-        alert("Compra realizada con éxito ✅ ");
+         alert("Compra realizada con éxito ✅ ");
         //redireccionar a la pagina de index
-        window.location.href = "../client/gracias.html";
+          let compra = JSON.parse(localStorage.getItem("compra"));
+          let correo = localStorage.getItem("correo");
+          let body = `
+          <table style="undefined;table-layout: fixed; width: 750px">
+<colgroup>
+<col style="width: 212px">
+<col style="width: 236px">
+<col style="width: 302px">
+</colgroup>
+<thead>
+  <tr>
+    <th>SACHAWASSI</th>
+    <th colspan="2">SISTEMA DE COMPRA DE COMPRA DE PASAJES ONLINE</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Embarcación</td>
+    <td>Fecha</td>
+    <td>Destino</td>
+  </tr>
+  <tr>
+    <td>${compra.bote_asignado}</td>
+    <td>${compra.fecha}</td>
+    <td>${compra.destino}</td>
+  </tr>
+  <tr>
+    <td>Datos del Pasajero</td>
+    <td colspan="2">${compra.cedula}</td>
+    <td colspan="2">${compra.nombresyapellidos}</td>
+  </tr>
+  <tr>
+    <td>Número de Asiento:</td>
+    <td colspan="2">${compra.asientosArray}</td>
+  </tr>
+  <tr>
+    <td>Hora de Salida</td>
+    <td>${compra.hora}</td>
+    <td>Total: ${compra.totalPago}</td>
+  </tr>
+</tbody>
+</table>
+          `
+          Email.send({
+          SecureToken : "57189a0f-872e-468f-848a-fd3186d3e85d",
+          To : correo,
+          From : "andriuedg@gmail.com",
+          Subject : "SachaWassi",
+          Body : body
+          }).then(
+            message => alert("Datos de la compra enviados a su correo ✅")
+            
+          );
+          //redireccionar en 5 segundos
+          setTimeout(function(){window.location.href = "../client/gracias.html" }, 5000);
+          
+
         
       });
     },
     onCancel: (data, actions) => {
+      //mostrar mensaje de pago cancelado
       alert("Pago cancelado 😢 ");
-      //eliminar datos de compra de la base de datos
-      let compra = JSON.parse(localStorage.getItem("compra"));
-      //eliminar de la base de datos
-      for(var i in compra.cedulas){
-        database.from("compras").delete().eq("cedula",compra.cedulas[i]).eq("fecha",compra.fecha).eq("destino",compra.destino).eq("bote_asignado",compra.bote_asignado).then(({data, error}) => {
-              if(error){
-                console.log(error);
-              }else{
-                console.log(data);
-              }
-        });
-              
-      }
+      //borrar datos de compra de la base de datos
+      eliminartx();
+      
     },
     onError: (data, actions) => {
-      return actions.order.capture().then(function (orderData) {
-        //obtener datos de compra para eliminarlos de la base
-        let compra = JSON.parse(localStorage.getItem("compra"));
-        //eliminar de la base de datos
-        for(var i in compra.cedulas){
-          database.from("compras").delete().eq("cedula",compra.cedulas[i]).eq("fecha",compra.fecha).eq("destino",compra.destino).eq("bote_asignado",compra.bote_asignado).then(({data, error}) => {
-            if(error){
-              console.log(error);
-            }else{
-              console.log(data);
-            }
-          });
-        
-        }
-        //eliminar datos de compra
-        alert("Pago cancelado 😢 ");
-        //redireccionar a la pagina de index
-        window.location.href = "../client/index.html";
-      });
+      //mostrar mensaje de error
+      alert("Error al procesar el pago 😢 ");
+      //borrar datos de compra de la base de datos
+      eliminartx();
     },
   })
   .render("#paypal-button-container");
 //en caso de rechazo
 //cerrar sesion si hizo click 
+
+
 const logout = document.querySelector("#logout");
 logout.addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/";
+    window.location.href = "https://eduardoguevarasw.github.io/sachawassi/";
 })
+
+
+

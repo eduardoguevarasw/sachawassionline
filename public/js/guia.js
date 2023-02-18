@@ -35,7 +35,11 @@ sidebarToggle.addEventListener("click", () => {
     }
 })
 
-
+//seleccionar solo fechas anteriores a la actual 
+let maxValue = new Date();
+maxValue.setDate(maxValue.getDate());
+maxValue = maxValue.toISOString().split("T")[0];
+document.getElementById("fecha").setAttribute("max", maxValue);
 
 let dataTable;
 let dataTableisInit = false;
@@ -65,11 +69,26 @@ const initDataTable = async () => {
     dataTableisInit = true;
 }
 
+function buscarfecha(){
+    initDataTable();
+}
 
 //funcion para listar los botes
 const listarBotes = async () => {
+
+    //al cambiar la fecha se debe actualizar la tabla
+    let fechaActual = document.getElementById("fecha").value;
+    console.log(fechaActual);
+    //cambiar el formato de la fecha en dd/mm/yyyy
+    //determinar la zona horaria
+    let fecha = new Date(fechaActual).toLocaleDateString('es-ES');
+    //aumentar un dia a la fecha
+    let fecha2 = new Date(fechaActual);
+    fecha2.setDate(fecha2.getDate() + 1);
+    fecha2 = new Date(fecha2).toLocaleDateString('es-ES');
+    console.log(fecha2);
+    console.log(fecha);
     //obtener la fecha de hoy en el formato dd/mm/yyyy
-    let fechaActual = new Date().toLocaleDateString('es-ES')
     let registroBotes = document.getElementById("registroBotes");
     let { data, error } = await database
     .from("compras")
@@ -91,13 +110,8 @@ const listarBotes = async () => {
             <td>${bote.asientosArray}</td>
             <td>${bote.destino}</td>
             <td>${bote.bote_asignado}</td>
-            <td>${bote.fecha}</td>
         </tr>
-      </div>
-
-
-
-        `;
+      </div>`;
     } );
 }
 
@@ -109,5 +123,5 @@ window.addEventListener("load",  async () => {
 const logout = document.querySelector(".logout");
 logout.addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/";
+    window.location.href = "https://eduardoguevarasw.github.io/sachawassi/";
 })

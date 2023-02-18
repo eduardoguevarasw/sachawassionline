@@ -156,6 +156,12 @@ btnAgregar.addEventListener("click", async (e) => {
           <input type="number" id="precio${contadorFila+1}" class="form-control" required>
       </div>
   </div>
+  <div class="col-md-2">
+      <div class="form-group">  
+          <label for="precio">Hora de Llegada Aprox</label>
+          <input type="time" id="llegada${contadorFila+1}" class="form-control" required>
+      </div>
+  </div>
   <div class="col-md-1">
       <div class="form-group">
           <label for="fecha">Guardar</label>
@@ -196,6 +202,7 @@ function SaveFila(fila) {
   let precio = document.getElementById("precio" + fila).value;
   let origen = document.getElementById("origen").value;
   let hora = document.getElementById("hora").value;
+  let llegada = document.getElementById("llegada"+fila).value;
   let bote_asignado = document.getElementById("bote_asignado").value;
   let lunes = document.getElementById("lunes").checked;
   let martes = document.getElementById("martes").checked;
@@ -253,6 +260,7 @@ function SaveFila(fila) {
           hora,
           bote_asignado,
           dias_disponible,
+          llegada
         };
         console.log(data);
         deleteFila(fila-1);
@@ -317,12 +325,12 @@ traer_botes();
 //control de hora 
 const hora = document.querySelector('input[type="time"]');
 hora.setAttribute('min', '06:00');
-hora.setAttribute('max', '21:00');
+hora.setAttribute('max', '17:00');
 
 hora.addEventListener('change', () => {
   const value = hora.value;
-  if (value < '06:00' || value >= '21:00') {
-    alert('Seleccione una hora entre las 6:00 AM y las 21:00 PM');
+  if (value < '06:00' || value >= '17:00') {
+    alert('Seleccione una hora entre las 6:00 AM y las 17:00 PM');
     hora.value = '';
   }
 });
@@ -351,6 +359,12 @@ const editBote = async (id) => {
       <div class="form-group">  
           <label for="precio">Precio</label>
           <input type="number" id="precio" class="form-control" required>
+      </div>
+  </div>
+  <div class="col-md-2">
+      <div class="form-group">  
+          <label for="precio">Hora Llegada</label>
+          <input type="time" id="llegada" class="form-control" required>
       </div>
   </div>
   <div class="col-md-2">
@@ -384,6 +398,7 @@ const editBote = async (id) => {
   document.getElementById("destino").value = res.data[0].destino;
   document.getElementById("precio").value = res.data[0].precio;
   document.getElementById("hora").value = res.data[0].hora;
+  document.getElementById("llegada").value = res.data[0].llegada;
   document.getElementById("bote_asignado").value = res.data[0].bote_asignado;
   document.getElementById("estado").value = res.data[0].estado;
   let dias = res.data[0].dias_disponible;
@@ -422,6 +437,7 @@ function updateRuta(id) {
   let destino = document.getElementById("destino").value;
   let precio = document.getElementById("precio").value;
   let hora = document.getElementById("hora").value;
+  let llegada = document.getElementById("llegada").value;
   let bote_asignado = document.getElementById("bote_asignado").value;
   let estado = document.getElementById("estado").value;
   console.log(estado);
@@ -451,7 +467,8 @@ function updateRuta(id) {
             hora: hora,
             bote_asignado: bote_asignado,
             dias_disponible: dias_disponible,
-            estado: estado
+            estado: estado,
+            llegada: llegada
           }
           if (document.getElementById("lunes").checked) {
             data.dias_disponible.push("lunes");
@@ -504,5 +521,5 @@ function updateRuta(id) {
 const logout = document.querySelector(".logout");
 logout.addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "https://eduardoguevarasw.github.io/sachawassionline/";
+    window.location.href = "https://eduardoguevarasw.github.io/sachawassi/";
 })

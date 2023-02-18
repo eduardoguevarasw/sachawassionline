@@ -48,6 +48,10 @@
                         <i class="uil uil-list-ol-alt"></i>
                         <span class="link-name">Guía de Pasajeros</span>
                     </a></li>
+                    <li><a href="./tours.html">
+                        <i class="uil uil-kayak"></i>
+                        <span class="link-name">Tours</span>
+                    </a></li>
             </ul>
             <ul class="logout-mode">
                 <li><a class="logout">
@@ -89,7 +93,17 @@
                     <i class="uil uil-table"></i>
                     <span class="text">Guía de Pasajeros</span>
                 </div>
-
+                Buscar por Fecha: 
+                <div class="row">
+                    <div class="col-4">
+                        <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Fecha">
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary" id="buscar" onclick="buscarfecha()">Buscar</button>
+                    </div>
+                </div>
+                <br>
+                <br>
                 <table id="table_id" class="display nowrap" style="width:100%">
                     <thead>
                         <tr>
@@ -100,7 +114,6 @@
                             <th>Asientos</th>
                             <th>Destino</th>
                             <th>Embarcación</th>
-                            <th>Fecha</th>
                         </tr>
                     </thead>
                     <tbody id="registroBotes"></tbody>
@@ -113,7 +126,6 @@
                             <th>Asientos</th>
                             <th>Destino</th>
                             <th>Embarcación</th>
-                            <th>Fecha</th>
                         </tr>
                     </tfoot>
                 </table>

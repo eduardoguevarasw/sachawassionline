@@ -4,13 +4,11 @@
 
 <head>
    <meta charset="utf-8" />
-   <title>Sacha Wassi | Mis Boletos</title>
+   <title>Sacha Wassi | Recuperar Contraseña</title>
    <link rel="stylesheet" href="css/navbar.css" />
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-
+   <script src="https://smtpjs.com/v3/smtp.js"></script>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
 
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -29,7 +27,7 @@
             <a href="https://eduardoguevarasw.github.io/sachawassi">Inicio</a>
          </li>
          <li><a href="rutasyhorarios.html">Horario</a></li>
-        <li><a href="formulario.html">Tours</a></li>
+        <li><a href="guiaviaje.html">Tours</a></li>
         <li><a href="term&cond.html">Términos&Condiciones</a></li>
         <li><a href="login.html">Iniciar Sesión</a></li>
       </ul>
@@ -40,46 +38,34 @@
    <br>
    <br>
    <div class="container-sm">
-      <h5>Rutas y Horarios</h5>
+      <h5>Recuperar tu Contraseña</h5>
       <div class="alert alert-warning" role="alert">
-         Para buscar una ruta por favor ingrese el origen o el destino en el campo de busqueda.
+         Ingresa tu correo electrónico y te enviaremos un enlace para que puedas restablecer tu contraseña.
        </div>
     <div>
         <div class="row">
-            <table id="table_id" class="display nowrap" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Origen</th>
-                        <th>Destino</th>
-                        <th>Embarcación</th>
-                        <th>hora</th>
-                        <th>Dias</th>
-                    </tr>
-                </thead>
-                <tbody id="registroBotes"></tbody>
-                <tfoot>
-                    <tr>
-                     <th>No</th>
-                     <th>Origen</th>
-                     <th>Destino</th>
-                     <th>Embarcación</th>
-                     <th>hora</th>
-                     <th>Dias</th>
-                    </tr>
-                </tfoot>
-            </table>
+            <!--formulario de cambio de contraseña-->
+            <form class="row g-3">
+                <div class="col-auto">
+                  <label for="correo" class="visually-hidden">Email</label>
+                  <input type="text" readonly class="form-control-plaintext" id="email" value="Correo Electrónico">
+                </div>
+                <div class="col-4">
+                  <label for="correo" class="visually-hidden">Password</label>
+                  <input type="email" class="form-control" id="correo" placeholder="correo@ejemplo.com">
+                </div>
+                <div class="col-auto">
+                  <button type="button" class="btn btn-primary mb-3" onclick="recuperar()">Enviar</button>
+                </div>
+              </form>
          </div>
       </div>
    </div>
 </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <!--Datatables CDN-->
-      <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
-      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-      <script src="rutashorarios.js"></script>
+      <script src="recuperar.js"></script>
 </html>

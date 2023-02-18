@@ -64,13 +64,22 @@
               <span class="link-name">Rutas</span>
             </a>
           </li>
+          <li><a href="./tours.html">
+            <i class="uil uil-kayak"></i>
+            <span class="link-name">Tours</span>
+        </a></li>
           <li>
             <a href="./guia.html">
               <i class="uil uil-list-ol-alt"></i>
               <span class="link-name">Guía de Pasajeros</span>
             </a>
           </li>
+          <li><a href="./personal.html">
+            <i class="uil uil-users-alt"></i>
+            <span class="link-name">Personal Administrativo</span>
+        </a></li>
         </ul>
+        
 
         <ul class="logout-mode">
           <li>
@@ -108,14 +117,14 @@
       <div class="dash-content">
         <div class="overview">
           <div class="title">
-            <i class="uil uil-map-marker"></i>
-            <span class="text">Ciudades</span>
+            <i class="uil uil-users"></i>
+            <span class="text">Personal administrativo </span>
           </div>
           <div class="boxes">
             <div class="box box1">
             </div>
             <div class="box box2">
-              <i class="uil uil-map-marker"></i>
+              <i class="uil uil-users"></i>
               <span class="text">Personal Administrativo</span>
               <br />
               <p>Cédula</p>
@@ -130,14 +139,14 @@
                 type="text"
                 id="nombre"
                 class="form-control"
-                placeholder=""
+                placeholder="Jose"
               />
               <p>Apellidos</p>
               <input
                 type="text"
                 id="apellido"
                 class="form-control"
-                placeholder=""
+                placeholder="Perez"
               />
               <p>Contraseña</p>
               <input
@@ -155,13 +164,13 @@
               />
               <br />
               <br />
-              <p>Estado</p>
-              <select class="form-control" id="estado">
-                <option value="disponible">Disponible</option>
-                <option value="no disponible">No Disponible</option>
+              <p>Rol</p>
+              <select class="form-control" id="rol">
+                <option value="admin">Administrador</option>
+                <option value="vendor">Vendedor</option>
               </select>
               <br />
-              <button type="button" class="btnGuardar" onclick="registrarCiudad()" id="saveBote" >
+              <button type="button" class="btnGuardar" onclick="registrarPersonal()" id="saveBote" >
                 Registrar
               </button>
               <button type="button" hidden onclick="editCiudad()" class="btnEdit" id="updateBote" >
